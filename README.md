@@ -2,7 +2,7 @@
 
 # AMP-PCS dataset
 -----
-Name of our project stands for **A**ccreting **M**illisecond **P**ulsars - **P**olarization via **C**ompton **S**cattering.
+The Name of our project stands for **A**ccreting **M**illisecond **P**ulsars - **P**olarization via **C**ompton **S**cattering.
 Simplified analysis with a focus on 5 X-features(Te, Tbb, τT , E, μ) and 2 Y -labels (I & U Stokes Parameters), laying the groundwork for complex hyperparameter adjustments and advanced modeling in later stages
 Used Modeling Techniques:
 • KRR Regression Analysis: To predict continuous output values (Stokes
