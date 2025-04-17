@@ -1,2 +1,150 @@
  I'm preparing a Q-learning model for my thesis. We are testing whether our algorithm gives us optimal values for P(power) and V(velocity) values where the displacement is the lowest. This is used for research in optimizing Laser Metal additive Manufacturing (LMAM)
-For this I tested manually using multiple simulations and computed our values as quadra
+For this I tested manually using multiple simulations and computed our values as a quadratic formula.
+import numpy as np
+import random
+import matplotlib.pyplot as plt
+
+# Constants
+a1, b1, c1 = -5.33335E-05,0.005571812, 2.321736449
+a2, b2, c2 = -0.000164653,0.143259306, -1.908263576
+
+# Ranges for v and P
+v_range = np.array([30, 40, 50, 60])  # Range for v with interval of 1
+P_range = np.array([65, 75, 85, 95])  # Range for P with interval of 1
+
+# Epsilon-greedy parameters
+epsilon = 0.5  # Initial epsilon value
+epsilon_decay = 0.9999  # Epsilon decay rate
+alpha = 0.1  # Learning rate
+gamma = 0.9  # Discount factor
+
+# Number of episodes and maximum steps per episode
+num_episodes = 5000
+max_steps = 100
+
+# Reward function
+def reward_function(v, P):
+    f = (a1 * v**2 + b1 * v + c1) * (a2 * P**2 + b2 * P + c2)
+    return 1/f if f > 0 else -1
+
+episode_rewards = []  # List to store rewards for each episode
+
+
+#Initialise actions
+#def increase_by_1_percent(value):
+    #return value * 1.01
+
+#def decrease_by_1_percent(value):
+    #return value * 0.99
+
+actions=[
+    ('decrease_v', 'decrease_P'),
+    ('increase_v', 'increase_P'),
+    ('increase_v', 'decrease_P'),
+    ('decrease_v', 'increase_P'),
+    ('increase_v', 'no_change_P'),
+    ('decrease_v', 'no_change_P'),
+    ('no_change_v', 'increase_P'),
+    ('no_change_v', 'decrease_P'),
+    ('no_change_v', 'no_change_P')
+]
+# Initialize Q-table with small random values
+Q_table = np.zeros((len(v_range), len(P_range), len(actions)))
+
+
+#Q learning algorithm
+for episode in range(num_episodes):
+    # Initialize state (randomly select v and P from their ranges)
+    v = random.choice(v_range)
+    P = random.choice(P_range)
+    
+    total_reward = 0  # Track total reward for this episode
+
+
+    for step in range(max_steps):
+        # Convert state to indices for Q-table
+        #Should we intialize v and P to random values in the range of v_range and P_range?
+        v = random.choice(v_range) #randomly select v from its range
+        P = random.choice(P_range) #randomly select P from its range
+        # Convert state to indices for Q-table
+        v_index = np.where(v_range == v)[0][0] #index values of v in v_range
+        P_index = np.where(P_range == P)[0][0] #index values of P in P_range
+
+    # Choose action using epsilon-greedy policy
+        if np.random.rand() < epsilon:
+            action_index = random.choice(range(len(actions)))  # Explore: randomly choose action
+        else:
+            action_index = np.argmax(Q_table[v_index, P_index])  # Exploit: choose best action
+
+    # Perform action based on the selected action index
+            action = actions[action_index]
+
+            if action == ('increase_v', 'decrease_P'):
+                v = random.choice(v_range[v_index + 1:]) if v_index +1 < len(v_range) else v # if true code selects values in v_range that come after the current value of v. if false v is unchanged
+                P = random.choice(P_range[:P_index]) if P_index > 0 else P #represents value of P that comes before the current value of P. if false P is unchanged. if P_index is greater than 0, it means there are values in P_range that come before the current value of P.If P==0 then P is unchanged as 
+            elif action == ('increase_v', 'increase_P'):
+                v = random.choice(v_range[v_index + 1:]) if v_index + 1 < len(v_range) else v
+                P = random.choice(P_range[P_index + 1:]) if P_index + 1 < len(P_range) else P
+            elif action == ('increase_v', 'decrease_P'):
+                v = random.choice(v_range[:v_index]) if v_index > 0  else v 
+                P = random.choice(P_range[:P_index]) if P_index > 0 else P
+            elif action == ('decrease_v', 'increase_P'):
+                v = random.choice(v_range[:v_index]) if v_index > 0 else v
+                P = random.choice(P_range[P_index + 1:]) if P_index + 1 < len(P_range) else P
+            elif action == ('increase_v', 'no_change_P'):
+                v = random.choice(v_range[v_index + 1:]) if v_index + 1 < len(v_range) else v
+            elif action == ('decrease_v', 'no_change_P'):
+                v = random.choice(v_range[:v_index]) if v_index > 0 else v
+            elif action == ('no_change_v', 'increase_P'):
+                P = random.choice(P_range[P_index + 1:]) if P_index + 1 < len(P_range) else P
+            elif action == ('no_change_v', 'decrease_P'):
+                P = random.choice(P_range[:P_index]) if P_index > 0 else P
+            elif action == ('no_change_v', 'no_change_P'):
+                pass  # No change to v or P
+
+        # Ensure v and P stay within their ranges
+            v = max(min(v, v_range[-1]), v_range[0]) # Min ensures that v does not exceed the maximum value in v_range, and max ensures that v does not go below the minimum value in v_range.
+            P = max(min(P, P_range[-1]), P_range[0]) # [-1] is to acess the last element of an array. So basically it is 1- length
+
+    # Calculate reward
+            reward = reward_function(v, P)
+            total_reward += reward
+
+    # Update Q-value
+            next_v_index = np.where(v_range == v)[0][0]
+            next_P_index = np.where(P_range == P)[0][0]
+            Q_table[v_index, P_index, action_index] += alpha * (
+            reward + gamma * np.max(Q_table[next_v_index, next_P_index]) - Q_table[v_index, P_index, action_index]
+        )
+            epsilon = max(0.01, epsilon * epsilon_decay)
+
+            episode_rewards.append(reward)
+
+
+    # Print progress
+    #if (episode + 1) % 10 == 0:
+          #print(f"Episode {episode + 1}/{num_episodes}, Total Reward: {total_reward}")
+
+    #After training, find the best Q-value and corresponding state-action pair
+overall_best_q_value = np.max(Q_table)# Find the maximum Q-value
+best_indices = np.unravel_index(np.argmax(Q_table), Q_table.shape)  # Get the indices of the best Q-value
+best_v = v_range[best_indices[0]]  # Corresponding v value
+best_P = P_range[best_indices[1]]  # Corresponding P value
+best_action = actions[best_indices[2]]  # Corresponding action
+
+# Print the overall best Q-value and corresponding state-action pair
+print(f"Overall best Q-value: {overall_best_q_value}")
+print(f"Best state-action pair: (v={best_v}, P={best_P}, action={best_action})")
+
+print("Q-Table after training:")
+print(Q_table)
+
+plt.figure(figsize=(7, 5))
+plt.plot(episode_rewards, label='Reward')
+plt.xlabel('Episode')
+plt.ylabel('Total Reward')
+plt.title('Reward vs Episodes')
+plt.legend()
+plt.show()
+
+
