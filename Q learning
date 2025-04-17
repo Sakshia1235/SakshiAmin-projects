@@ -1,0 +1,2 @@
+ I'm preparing a Q-learning model for my thesis. We are testing whether our algorithm gives us optimal values for P(power) and V(velocity) values where the displacement is the lowest. This is used for research in optimizing Laser Metal additive Manufacturing (LMAM)
+For this I tested manually using multiple simulations and computed our values as quadra
