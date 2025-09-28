@@ -1,8 +1,8 @@
-# Course- Machine Learning for Materials Engineering
+# Machine Learning for Materials Engineering
 
-# AMP-PCS dataset
+# Estimating Stokes Parameters for Neutron Stars using various ML techniques 
 -----
-The Name of our project stands for **A**ccreting **M**illisecond **P**ulsars - **P**olarization via **C**ompton **S**cattering.
+In our project we use various ML techniques to estimate the Stokes parameters of Neutron stars, crucial for understanding the polarimetric properties of :  **A**ccreting **M**illisecond **P**ulsars (AMP)- **P**olarization via **C**ompton **S**cattering .
 Simplified analysis with a focus on 5 X-features(Te, Tbb, τT , E, μ) and 2 Y -labels (I & U Stokes Parameters), laying the groundwork for complex hyperparameter adjustments and advanced modeling in later stages
 Used Modeling Techniques:
 • KRR Regression Analysis: To predict continuous output values (Stokes
