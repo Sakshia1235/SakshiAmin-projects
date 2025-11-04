@@ -1,4 +1,4 @@
-# A control policy using Q-learning method was developed to learn the optimal scan speed and laser power in LPBF for minimizing displacement**.
+# Optimizing Laser Powder Bed Fusion (L-PBF) for Improved Performance: A Reinforcement Learning Approach for Choosing Process Parameters.
 **Overview**
 
 Poor choice of process parameters induces the formation of defects, which suggests the need for an improved control system to optimize the result. Hence this study focuses on the Specific goal focuses on finding optimal laser power (P) and scanning speed (V) parameters for nine different combinations, to maintain melt pool depth eventually aiming to minimize defects, enhance productivity and improve part quality. 
