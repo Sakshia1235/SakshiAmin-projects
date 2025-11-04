@@ -13,8 +13,8 @@ def random_argmax(array):
     return random.choice(max_indices)
 
 # Ranges
-v_range = np.arange(40, 101, 0.1) #610
-P_range = np.arange(75, 301, 0.1) #2260
+v_range = np.arange(40, 101, 0.1) ##610 values in state space v
+P_range = np.arange(75, 301, 0.1) #2260 values in state space P Total values are 610*2260= 13786000 in (p,V)
 
 # Parameters
 epsilon = 0.2
@@ -47,7 +47,7 @@ actions = [
     ('no_change_v', 'no_change_P')
 ]
 
-Q_table = np.ones((len(v_range), len(P_range), len(actions))) * 10.0
+Q_table = np.ones((len(v_range), len(P_range), len(actions))) * 10.0 #Intialising Q table with high values
 
 best_seen_reward = -float('inf')
 best_state_from_training = None
@@ -58,14 +58,14 @@ break_var=0
 # Q-learning
 for episode in range(num_episodes):
     if break_var==0:
-        v = random.choice(v_range)
-        P = random.choice(P_range)
+        v = random.choice(v_range) #Randomly select initial v
+        P = random.choice(P_range) #Randomly select initial P
         total_reward = 0
         break_var+=1
 
     for step in range(max_steps):
-        v_index = np.where(v_range == v)[0][0]
-        P_index = np.where(P_range == P)[0][0]
+        v_index = np.where(v_range == v)[0][0]  # Get index of current v
+        P_index = np.where(P_range == P)[0][0]  # Get index of current P
         indexdeltav = 1
         indexdelta = 1
 
