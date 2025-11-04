@@ -5,7 +5,7 @@ Here you will find my key research and coding projects in materials science, mac
 
 ## 📁 Machine Learning for Materials Science - AMPS
 
-This folder contains scripts, notebooks, and resources of various ML techniques used to estimate the Stokes parameters of Neutron stars, crucial for understanding the polarimetric properties of : Accreting Millisecond Pulsars(AMPs). 
+This folder contains scripts, notebooks, and resources of various ML techniques used to estimate the Stokes parameters of Neutron stars, crucial for understanding the polarimetric properties of : Accreting Millisecond Pulsars(AMPs). https://github.com/Sakshia1235/SakshiAmin-projects/tree/main/Machine%20learning%20for%20materials%20science-%20AMPCS 
 
 ## 📁 Q-Learning Thesis Module
 
