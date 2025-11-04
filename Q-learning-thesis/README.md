@@ -1,5 +1,6 @@
 # A control policy using Q-learning method was developed to learn the optimal scan speed and laser power in LPBF for minimizing displacement**.
 **Overview**
+
 Poor choice of process parameters induces the formation of defects, which suggests the need for an improved control system to optimize the result. Hence this study focuses on the Specific goal focuses on finding optimal laser power (P) and scanning speed (V) parameters for nine different combinations, to maintain melt pool depth eventually aiming to minimize defects, enhance productivity and improve part quality. 
 The core of the work involved implementing a Reinforcement Learning (RL) control policy that iteratively identified optimal laser power and scanning speed to minimize part displacement. This was supported high-fidelity melt pool simulations in Flow-3D AM and macro-scale thermal and stress analyses in Abaqus. Furthermore, I utilized Response Surface Methodology (RSM) to develop a validated surrogate model for statistical analysis and prediction of displacement values.
 
