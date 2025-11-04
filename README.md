@@ -5,9 +5,11 @@ Here you will find my key research and coding projects in materials science, mac
 
 ## 📁 Machine Learning for Materials Science - AMPS
 
-This folder contains scripts, notebooks, and resources of various ML techniques used to estimate the Stokes parameters of Neutron stars, crucial for understanding the polarimetric properties of : Accreting Millisecond Pulsars(AMPs). https://github.com/Sakshia1235/SakshiAmin-projects/tree/main/Machine%20learning%20for%20materials%20science-%20AMPCS 
+This folder contains scripts, notebooks, and resources of various ML techniques used to estimate the Stokes parameters of Neutron stars, crucial for understanding the polarimetric properties of : Accreting Millisecond Pulsars(AMPs). 
+https://github.com/Sakshia1235/SakshiAmin-projects/tree/main/Machine%20learning%20for%20materials%20science-%20AMPCS 
 
 ## 📁 Q-Learning Thesis Module
 
 This folder holds the code and documentation from my thesis project focused on reinforcement learning.  It features my implementation of Q-learning and its application to parameter optimization.
+https://github.com/Sakshia1235/SakshiAmin-projects/tree/main/Q-learning-thesis
 
