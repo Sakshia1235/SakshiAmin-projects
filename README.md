@@ -1,7 +1,7 @@
 Welcome to my repository!  
 Here you will find my key research and coding projects in materials science, machine learning, and reinforcement learning.
 
----
+
 
 ## 📁 Machine Learning for Materials Science - AMPS
 
